@@ -47,7 +47,9 @@ Flutter clean
 The base url is a movie database api https://www.themoviedb.org.
 
 ### Features
+
 - Movies (Now playing, Popular, Top rated, Coming soon, Genres)
+- TvShow (Airing today, On the air, Popular, Top rated)
 - People (Popular)
 - Search Movies, TV Shows, and People
 - Account (Favorites, Watchlists, Lists)
@@ -61,7 +63,7 @@ MooviTime is now available on the [Google Play Store](#TODO).
 Clone the GitHub repository and open the project in `Android Studio` or `Visual Studio Code`.
 
 ```
-$ git clone https://github.com/rok5ek/MooviTime.git
+$ https://github.com/rok5ek/flutter_moovi_time.git
 ```
 
 ## License
@@ -69,5 +71,6 @@ $ git clone https://github.com/rok5ek/MooviTime.git
 MooviTime is licensed via [Apache License v2.0](LICENSE).
 
 ## Author
+
 Rok Petek, https://www.linkedin.com/in/rok-petek-4673b459/
 

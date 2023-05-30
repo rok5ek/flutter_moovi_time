@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:moovi_time/data/config.dart';
 import 'package:moovi_time/data/datasources/remote/tmdb_endpoints.dart';
 import 'package:moovi_time/data/models/movieresponse/movie_response_wrapper.dart';
+import 'package:moovi_time/data/models/tvshowresponse/tvshow_response_wrapper.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'tmdb_api_service.g.dart';
@@ -21,4 +22,16 @@ abstract class TmdbApiService {
 
   @GET(TmdbEndpoints.moviesTopRated)
   Future<HttpResponse<MovieResponseWrapper>> getMoviesTopRated(@CancelRequest() CancelToken cancelToken);
+
+  @GET(TmdbEndpoints.tvShowsAiringToday)
+  Future<HttpResponse<TvShowResponseWrapper>> getTvShowsAiringToday(@CancelRequest() CancelToken cancelToken);
+
+  @GET(TmdbEndpoints.tvShowsOnTheAir)
+  Future<HttpResponse<TvShowResponseWrapper>> getTvShowsOnTheAir(@CancelRequest() CancelToken cancelToken);
+
+  @GET(TmdbEndpoints.tvShowsPopular)
+  Future<HttpResponse<TvShowResponseWrapper>> getTvShowsPopular(@CancelRequest() CancelToken cancelToken);
+
+  @GET(TmdbEndpoints.tvShowsTopRated)
+  Future<HttpResponse<TvShowResponseWrapper>> getTvShowsTopRated(@CancelRequest() CancelToken cancelToken);
 }

@@ -40,9 +40,10 @@ class _MovieTimeAppState extends State<MovieTimeApp> {
     return MaterialApp(
       title: 'MooviTime',
       theme: ThemeData(
+        useMaterial3: true,
         primarySwatch: Colors.blue,
       ),
-      initialRoute: AppScreens.home,
+      initialRoute: AppScreens.main,
       onGenerateRoute: getIt<AppRouter>().onGenerateRoute,
     );
   }

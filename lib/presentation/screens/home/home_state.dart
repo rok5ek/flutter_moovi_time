@@ -1,5 +1,5 @@
-import 'package:moovi_time/domain/models/movie_entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:moovi_time/domain/models/movie_entity.dart';
 
 part 'home_state.freezed.dart';
 

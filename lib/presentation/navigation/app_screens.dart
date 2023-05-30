@@ -1,3 +1,3 @@
 class AppScreens {
-  static const String home = "/";
+  static const String main = "/";
 }

@@ -78,5 +78,7 @@ class GetHomeModel extends UseCase<AppResult<HomeModelResult, AppError>, NoParam
   void onDispose() {
     getMoviesNowPlaying.onDispose();
     getMoviesPopular.onDispose();
+    getMoviesComingSoon.onDispose();
+    getMoviesTopRated.onDispose();
   }
 }
