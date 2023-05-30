@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moovi_time/presentation/core/models/large_item.dart';
+import 'package:moovi_time/presentation/core/widgets/circle_section_view.dart';
 import 'package:moovi_time/presentation/core/widgets/large_section_view.dart';
 import 'package:moovi_time/presentation/screens/home/home_bloc.dart';
 import 'package:moovi_time/presentation/screens/home/home_state.dart';
@@ -35,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return ListView(
           key: const PageStorageKey("sections_key"),
           children: [
-            LargeSectionView(
+            CircleSectionView(
                 title: "Now playing",
                 items: state.nowPlayingMovies.map((e) {
                   return LargeItem(title: e.title, subtitle: e.overview, imageUrl: e.image);

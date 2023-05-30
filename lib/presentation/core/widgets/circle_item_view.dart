@@ -1,14 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/widgets.dart';
 import 'package:moovi_time/presentation/core/models/large_item.dart';
 import 'package:moovi_time/presentation/core/resources/app_paddings.dart';
-import 'package:moovi_time/presentation/core/resources/app_shapes.dart';
 import 'package:moovi_time/presentation/core/resources/app_text_styles.dart';
+import 'package:moovi_time/presentation/core/widgets/circle_image_view.dart';
 
-class LargeItemView extends StatelessWidget {
+class CircleItemView extends StatelessWidget {
   final LargeItem item;
 
-  const LargeItemView({
+  const CircleItemView({
     required this.item,
     Key? key,
   }) : super(key: key);
@@ -18,22 +17,20 @@ class LargeItemView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppPaddings.p8),
       child: SizedBox(
-        width: 140,
+        width: 100,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ClipOval(
-              child: CachedNetworkImage(
-                imageUrl: item.imageUrl,
-                fit: BoxFit.cover,
-              ),
+            CircleImageView(
+              image: item.imageUrl,
             ),
             Padding(
               padding: const EdgeInsets.only(top: AppPaddings.p8),
               child: Text(
                 item.title,
                 maxLines: 1,
+                textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyles.movieViewTitle,
               ),
