@@ -31,7 +31,7 @@ class CircleSectionView extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 200,
+          height: 130,
           child: ListView.builder(
             shrinkWrap: true,
             key: _pageStorageKey,

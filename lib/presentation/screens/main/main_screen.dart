@@ -59,25 +59,24 @@ class _MainScreenState extends State<MainScreen> {
           // body extends to the bottom of the Scaffold, instead of only extending
           // to the top of the bottomNavigationBar or the persistentFooterButtons.
           extendBody: true,
-          bottomNavigationBar: BottomNavigationBar(
-            elevation: 0,
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
+          bottomNavigationBar: NavigationBar(
+            // elevation: 0,
+            selectedIndex: state.navbarItem.index,
+            destinations: const <Widget>[
+              NavigationDestination(
                 icon: Icon(FeatherIcons.film),
                 label: 'Movies',
               ),
-              BottomNavigationBarItem(
+              NavigationDestination(
                 icon: Icon(FeatherIcons.youtube),
                 label: 'Tv Shows',
               ),
-              BottomNavigationBarItem(
+              NavigationDestination(
                 icon: Icon(FeatherIcons.user),
                 label: 'Profile',
               ),
             ],
-            currentIndex: state.navbarItem.index,
-            selectedItemColor: Colors.amber[800],
-            onTap: (int index) {
+            onDestinationSelected: (int index) {
               context.read<MainBloc>().add(MainEvent.navbarItemClick(index: index));
             },
           ),

@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:moovi_time/presentation/core/models/large_item.dart';
 import 'package:moovi_time/presentation/core/resources/app_paddings.dart';
 import 'package:moovi_time/presentation/core/resources/app_shapes.dart';
@@ -21,13 +21,14 @@ class LargeItemView extends StatelessWidget {
         width: 140,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.max,
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(AppShapes.s16)),
-              child: CachedNetworkImage(
-                imageUrl: item.imageUrl,
-                fit: BoxFit.cover,
+            Expanded(
+              child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(AppShapes.s16)),
+                child: CachedNetworkImage(
+                  imageUrl: item.imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             Padding(

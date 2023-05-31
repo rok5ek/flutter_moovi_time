@@ -31,10 +31,10 @@ class LargeSectionView extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 300,
+          height: 270,
           child: ListView.builder(
             key: _pageStorageKey,
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.only(left:AppPaddings.p8,right:AppPaddings.p8),
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             itemCount: items.length,

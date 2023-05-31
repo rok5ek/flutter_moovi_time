@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:moovi_time/presentation/core/models/large_item.dart';
 import 'package:moovi_time/presentation/core/resources/app_paddings.dart';
 import 'package:moovi_time/presentation/core/resources/app_text_styles.dart';
@@ -17,10 +17,10 @@ class CircleItemView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppPaddings.p8),
       child: SizedBox(
-        width: 100,
+        width: 64,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             CircleImageView(
               image: item.imageUrl,
@@ -29,17 +29,11 @@ class CircleItemView extends StatelessWidget {
               padding: const EdgeInsets.only(top: AppPaddings.p8),
               child: Text(
                 item.title,
-                maxLines: 1,
+                maxLines: 2,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
-                style: AppTextStyles.movieViewTitle,
+                style: AppTextStyles.movieViewTitleSmall,
               ),
-            ),
-            Text(
-              item.subtitle,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: AppTextStyles.movieViewSubtitle,
             ),
           ],
         ),

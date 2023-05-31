@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:moovi_time/presentation/core/models/large_item.dart';
+import 'package:moovi_time/presentation/core/resources/app_text_styles.dart';
 import 'package:moovi_time/presentation/core/widgets/circle_section_view.dart';
 import 'package:moovi_time/presentation/core/widgets/large_section_view.dart';
 import 'package:moovi_time/presentation/screens/tvshows/tvshows_bloc.dart';
@@ -20,7 +22,18 @@ class _TvShowsScreenState extends State<TvShowsScreen> {
       // disables keyboard overflow issue
       resizeToAvoidBottomInset: false,
       // backgroundColor: AppColors.background,
-      // appBar: AppToolbar(),
+      appBar: AppBar(
+        title: const Text(
+          "Tv Shows",
+          style: AppTextStyles.toolbarTitle,
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(FeatherIcons.search),
+            onPressed: () {},
+          )
+        ],
+      ),
       body: SafeArea(
         bottom: false,
         child: Container(
