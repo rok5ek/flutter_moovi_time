@@ -41,7 +41,7 @@ class _MovieTimeAppState extends State<MovieTimeApp> {
       title: 'MooviTime',
       theme: ThemeData(
         useMaterial3: true,
-        colorSchemeSeed: Colors.green[700], // const Color.fromARGB(1, 226, 107, 141),
+        colorSchemeSeed: Colors.amber, // const Color.fromARGB(1, 226, 107, 141),
       ),
       initialRoute: AppScreens.main,
       onGenerateRoute: getIt<AppRouter>().onGenerateRoute,

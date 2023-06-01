@@ -4,6 +4,7 @@ import 'package:moovi_time/data/config.dart';
 import 'package:moovi_time/data/datasources/remote/tmdb_api_service.dart';
 import 'package:moovi_time/data/repositories/app_repository_impl.dart';
 import 'package:moovi_time/domain/repositories/app_repository.dart';
+import 'package:moovi_time/domain/usecases/get_genres.dart';
 import 'package:moovi_time/domain/usecases/get_movies.dart';
 import 'package:moovi_time/domain/usecases/get_tvshows.dart';
 import 'package:moovi_time/domain/usecases/gethomemodel/get_home_model.dart';
@@ -22,10 +23,10 @@ Future<void> initDependencies() async {
   final dio = Dio();
   dio.options.queryParameters = {"api_key": Config.apiKey};
   dio.interceptors.add(PrettyDioLogger(
-    requestHeader: true,
-    requestBody: true,
-    responseBody: true,
-    responseHeader: false,
+    // requestHeader: true,
+    // requestBody: true,
+    responseBody: false,
+    // responseHeader: false,
     compact: false,
   ));
 
@@ -36,15 +37,17 @@ Future<void> initDependencies() async {
 
   // use cases
   getIt.registerLazySingleton<GetMovies>(() => GetMovies(repository: getIt<AppRepository>()));
+  getIt.registerLazySingleton<GetTvShows>(() => GetTvShows(repository: getIt<AppRepository>()));
+  getIt.registerLazySingleton<GetGenres>(() => GetGenres(repository: getIt<AppRepository>()));
   getIt.registerLazySingleton<GetHomeModel>(
     () => GetHomeModel(
       getMoviesNowPlaying: getIt<GetMovies>(),
       getMoviesPopular: getIt<GetMovies>(),
       getMoviesComingSoon: getIt<GetMovies>(),
       getMoviesTopRated: getIt<GetMovies>(),
+      getGenres: getIt<GetGenres>(),
     ),
   );
-  getIt.registerLazySingleton<GetTvShows>(() => GetTvShows(repository: getIt<AppRepository>()));
   getIt.registerLazySingleton<GetTvShowsModel>(
     () => GetTvShowsModel(
       getTvShowsAiringToday: getIt<GetTvShows>(),

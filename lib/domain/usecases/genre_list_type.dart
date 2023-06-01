@@ -1,0 +1,1 @@
+enum GenreListType { movie, tvShow }

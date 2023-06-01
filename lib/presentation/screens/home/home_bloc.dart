@@ -18,7 +18,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           nowPlayingMovies: [],
           popularMovies: [],
           comingSoonMovies: [],
-    topRatedMovies: [],
+          topRatedMovies: [],
+          genres: [],
         )) {
     on<HomeEvent>((event, emit) async {
       await event.when(
@@ -34,6 +35,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 popularMovies: data.popularMovies,
                 comingSoonMovies: data.comingSoonMovies,
                 topRatedMovies: data.topRatedMovies,
+                genres: data.genres,
               ));
             },
             error: (error) {},

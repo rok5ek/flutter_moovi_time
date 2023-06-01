@@ -18,7 +18,8 @@ class ProfileBloc extends Bloc<HomeEvent, HomeState> {
           nowPlayingMovies: [],
           popularMovies: [],
           comingSoonMovies: [],
-    topRatedMovies: [],
+          topRatedMovies: [],
+          genres: [],
         )) {
     on<HomeEvent>((event, emit) async {
       await event.when(
