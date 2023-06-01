@@ -7,17 +7,15 @@ import 'package:moovi_time/domain/usecases/base/app_exception.dart';
 import 'package:moovi_time/domain/usecases/base/app_result.dart';
 import 'package:moovi_time/domain/usecases/base/no_params.dart';
 import 'package:moovi_time/domain/usecases/base/use_case.dart';
-import 'package:moovi_time/domain/usecases/get_movies_coming_soon.dart';
-import 'package:moovi_time/domain/usecases/get_movies_now_playing.dart';
-import 'package:moovi_time/domain/usecases/get_movies_popular.dart';
-import 'package:moovi_time/domain/usecases/get_movies_top_rated.dart';
+import 'package:moovi_time/domain/usecases/get_movies.dart';
 import 'package:moovi_time/domain/usecases/gethomemodel/home_model_result.dart';
+import 'package:moovi_time/domain/usecases/movie_list_type.dart';
 
 class GetHomeModel extends UseCase<AppResult<HomeModelResult, AppError>, NoParams> {
-  final GetMoviesNowPlaying getMoviesNowPlaying;
-  final GetMoviesPopular getMoviesPopular;
-  final GetMoviesComingSoon getMoviesComingSoon;
-  final GetMoviesTopRated getMoviesTopRated;
+  final GetMovies getMoviesNowPlaying;
+  final GetMovies getMoviesPopular;
+  final GetMovies getMoviesComingSoon;
+  final GetMovies getMoviesTopRated;
 
   GetHomeModel({
     required this.getMoviesNowPlaying,
@@ -28,10 +26,10 @@ class GetHomeModel extends UseCase<AppResult<HomeModelResult, AppError>, NoParam
 
   @override
   Future<AppResult<HomeModelResult, AppError>> call(NoParams params) async {
-    final getMoviesNowPlayingRequest = getMoviesNowPlaying.call(const NoParams());
-    final getMoviesPopularRequest = getMoviesPopular.call(const NoParams());
-    final getMoviesComingSoonRequest = getMoviesComingSoon.call(const NoParams());
-    final getMoviesTopRatedRequest = getMoviesTopRated.call(const NoParams());
+    final getMoviesNowPlayingRequest = getMoviesNowPlaying.call(GetMoviesParams(type: MovieListType.nowPlaying));
+    final getMoviesPopularRequest = getMoviesPopular.call(GetMoviesParams(type: MovieListType.popular));
+    final getMoviesComingSoonRequest = getMoviesComingSoon.call(GetMoviesParams(type: MovieListType.comingSoon));
+    final getMoviesTopRatedRequest = getMoviesTopRated.call(GetMoviesParams(type: MovieListType.topRated));
 
     final result = await await4(
         getMoviesNowPlayingRequest, getMoviesPopularRequest, getMoviesComingSoonRequest, getMoviesTopRatedRequest,

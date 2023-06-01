@@ -5,6 +5,8 @@ import 'package:moovi_time/data/models/movieresponse/movie_response_wrapper.dart
 import 'package:moovi_time/data/models/tvshowresponse/tvshow_response_wrapper.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../../models/genreresponse/genre_response_wrapper.dart';
+
 part 'tmdb_api_service.g.dart';
 
 @RestApi(baseUrl: Config.baseUrl)
@@ -34,4 +36,10 @@ abstract class TmdbApiService {
 
   @GET(TmdbEndpoints.tvShowsTopRated)
   Future<HttpResponse<TvShowResponseWrapper>> getTvShowsTopRated(@CancelRequest() CancelToken cancelToken);
+
+  @GET(TmdbEndpoints.movieGenres)
+  Future<HttpResponse<GenreResponseWrapper>> getMovieGenres(@CancelRequest() CancelToken cancelToken);
+
+  @GET(TmdbEndpoints.tvGenres)
+  Future<HttpResponse<GenreResponseWrapper>> getTvGenres(@CancelRequest() CancelToken cancelToken);
 }

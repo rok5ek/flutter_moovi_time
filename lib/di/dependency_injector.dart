@@ -4,10 +4,7 @@ import 'package:moovi_time/data/config.dart';
 import 'package:moovi_time/data/datasources/remote/tmdb_api_service.dart';
 import 'package:moovi_time/data/repositories/app_repository_impl.dart';
 import 'package:moovi_time/domain/repositories/app_repository.dart';
-import 'package:moovi_time/domain/usecases/get_movies_coming_soon.dart';
-import 'package:moovi_time/domain/usecases/get_movies_now_playing.dart';
-import 'package:moovi_time/domain/usecases/get_movies_popular.dart';
-import 'package:moovi_time/domain/usecases/get_movies_top_rated.dart';
+import 'package:moovi_time/domain/usecases/get_movies.dart';
 import 'package:moovi_time/domain/usecases/get_tvshows.dart';
 import 'package:moovi_time/domain/usecases/gethomemodel/get_home_model.dart';
 import 'package:moovi_time/domain/usecases/gettvshowsmodel/get_tvshows_model.dart';
@@ -38,16 +35,13 @@ Future<void> initDependencies() async {
   getIt.registerLazySingleton<AppRepository>(() => AppRepositoryImpl(tmdbApiService: getIt<TmdbApiService>()));
 
   // use cases
-  getIt.registerLazySingleton<GetMoviesNowPlaying>(() => GetMoviesNowPlaying(repository: getIt<AppRepository>()));
-  getIt.registerLazySingleton<GetMoviesPopular>(() => GetMoviesPopular(repository: getIt<AppRepository>()));
-  getIt.registerLazySingleton<GetMoviesComingSoon>(() => GetMoviesComingSoon(repository: getIt<AppRepository>()));
-  getIt.registerLazySingleton<GetMoviesTopRated>(() => GetMoviesTopRated(repository: getIt<AppRepository>()));
+  getIt.registerLazySingleton<GetMovies>(() => GetMovies(repository: getIt<AppRepository>()));
   getIt.registerLazySingleton<GetHomeModel>(
     () => GetHomeModel(
-      getMoviesNowPlaying: getIt<GetMoviesNowPlaying>(),
-      getMoviesPopular: getIt<GetMoviesPopular>(),
-      getMoviesComingSoon: getIt<GetMoviesComingSoon>(),
-      getMoviesTopRated: getIt<GetMoviesTopRated>(),
+      getMoviesNowPlaying: getIt<GetMovies>(),
+      getMoviesPopular: getIt<GetMovies>(),
+      getMoviesComingSoon: getIt<GetMovies>(),
+      getMoviesTopRated: getIt<GetMovies>(),
     ),
   );
   getIt.registerLazySingleton<GetTvShows>(() => GetTvShows(repository: getIt<AppRepository>()));

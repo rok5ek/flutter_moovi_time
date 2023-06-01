@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:moovi_time/presentation/core/models/large_item.dart';
+import 'package:moovi_time/presentation/core/resources/app_paddings.dart';
 import 'package:moovi_time/presentation/core/resources/app_text_styles.dart';
 import 'package:moovi_time/presentation/core/widgets/circle_section_view.dart';
 import 'package:moovi_time/presentation/core/widgets/large_section_view.dart';
@@ -66,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 }).toList()),
             LargeSectionView(
                 title: "Top Rated",
+                bottomPadding: AppPaddings.p36,
                 items: state.topRatedMovies.map((e) {
                   return LargeItem(title: e.title, subtitle: e.overview, imageUrl: e.image);
                 }).toList())

@@ -7,4 +7,6 @@ class TmdbEndpoints {
   static const String tvShowsOnTheAir = "/tv/on_the_air";
   static const String tvShowsPopular = "/tv/popular";
   static const String tvShowsTopRated = "/tv/top_rated";
+  static const String movieGenres = "/genre/movie/list";
+  static const String tvGenres = "/genre/tv/list";
 }

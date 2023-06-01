@@ -2,21 +2,27 @@ import 'package:moovi_time/domain/models/movie_entity.dart';
 import 'package:moovi_time/domain/repositories/app_repository.dart';
 import 'package:moovi_time/domain/usecases/base/app_error.dart';
 import 'package:moovi_time/domain/usecases/base/app_result.dart';
-import 'package:moovi_time/domain/usecases/base/no_params.dart';
 import 'package:moovi_time/domain/usecases/base/use_case.dart';
+import 'package:moovi_time/domain/usecases/movie_list_type.dart';
 
-class GetMoviesComingSoon extends UseCase<AppResult<List<MovieEntity>, AppError>, NoParams> {
+class GetMovies extends UseCase<AppResult<List<MovieEntity>, AppError>, GetMoviesParams> {
   final AppRepository repository;
 
-  GetMoviesComingSoon({required this.repository});
+  GetMovies({required this.repository});
 
   @override
-  Future<AppResult<List<MovieEntity>, AppError>> call(NoParams params) async {
-    return await repository.getMoviesComingSoon(cancelToken);
+  Future<AppResult<List<MovieEntity>, AppError>> call(GetMoviesParams params) async {
+    return await repository.getMovies(cancelToken, params);
   }
 
   @override
   void onDispose() {
     cancelToken.cancel();
   }
+}
+
+class GetMoviesParams {
+  final MovieListType type;
+
+  GetMoviesParams({required this.type});
 }

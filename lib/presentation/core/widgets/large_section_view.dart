@@ -9,44 +9,49 @@ class LargeSectionView extends StatelessWidget {
   final PageStorageKey _pageStorageKey = PageStorageKey(const Uuid().v1().toString());
   final String title;
   final List<LargeItem> items;
+  final double bottomPadding;
 
   // final Function onTap;
 
   LargeSectionView({
     required this.title,
+    this.bottomPadding = 0,
     required this.items,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(AppPaddings.p16),
-          child: Text(
-            title,
-            style: AppTextStyles.sectionViewTitle,
+    return Padding(
+      padding: EdgeInsets.only(bottom: bottomPadding),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(AppPaddings.p16),
+            child: Text(
+              title,
+              style: AppTextStyles.sectionViewTitle,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 270,
-          child: ListView.builder(
-            key: _pageStorageKey,
-            padding: const EdgeInsets.only(left:AppPaddings.p8,right:AppPaddings.p8),
-            physics: const BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            itemCount: items.length,
-            itemBuilder: (BuildContext context, int index) {
-              LargeItem item = items[index];
-              return LargeItemView(
-                item: item,
-              );
-            },
+          SizedBox(
+            height: 250,
+            child: ListView.builder(
+              key: _pageStorageKey,
+              padding: const EdgeInsets.only(left: AppPaddings.p8, right: AppPaddings.p8),
+              physics: const BouncingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: items.length,
+              itemBuilder: (BuildContext context, int index) {
+                LargeItem item = items[index];
+                return LargeItemView(
+                  item: item,
+                );
+              },
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
