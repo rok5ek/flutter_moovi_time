@@ -11,6 +11,7 @@ import 'package:moovi_time/domain/usecases/getmoviesmodel/get_movies_model.dart'
 import 'package:moovi_time/domain/usecases/gettvshowsmodel/get_tvshows_model.dart';
 import 'package:moovi_time/presentation/app_bloc.dart';
 import 'package:moovi_time/presentation/navigation/app_router.dart';
+import 'package:moovi_time/presentation/screens/discover/discover_bloc.dart';
 import 'package:moovi_time/presentation/screens/main/main_bloc.dart';
 import 'package:moovi_time/presentation/screens/movies/movies_bloc.dart';
 import 'package:moovi_time/presentation/screens/profile/profile_bloc.dart';
@@ -64,6 +65,7 @@ Future<void> initDependencies() async {
   getIt.registerLazySingleton<MoviesBloc>(() => MoviesBloc(getMoviesModel: getIt<GetMoviesModel>()));
   getIt.registerLazySingleton<TvShowsBloc>(() => TvShowsBloc(getTvShowsModel: getIt<GetTvShowsModel>()));
   getIt.registerLazySingleton<ProfileBloc>(() => ProfileBloc());
+  getIt.registerLazySingleton<DiscoverBloc>(() => DiscoverBloc(getMoviesModel: getIt<GetMoviesModel>()));
 
   // router
   getIt.registerLazySingleton<AppRouter>(() => AppRouter());
