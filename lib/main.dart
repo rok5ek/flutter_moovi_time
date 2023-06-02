@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moovi_time/di/dependency_injector.dart';
+import 'package:moovi_time/presentation/app_bloc.dart';
+import 'package:moovi_time/presentation/app_state.dart';
 import 'package:moovi_time/presentation/navigation/app_router.dart';
 import 'package:moovi_time/presentation/navigation/app_screens.dart';
 
@@ -37,14 +40,26 @@ class _MovieTimeAppState extends State<MovieTimeApp> {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'MooviTime',
-      theme: ThemeData(
-        useMaterial3: true,
-        colorSchemeSeed: Colors.amber, // const Color.fromARGB(1, 226, 107, 141),
+    return BlocProvider(
+      create: (context) => getIt<AppBloc>(), // AppBloc(),
+      child: BlocBuilder<AppBloc, AppState>(
+        builder: (context, state) {
+          return MaterialApp(
+            title: 'MooviTime',
+            theme: ThemeData(
+                useMaterial3: true,
+                colorSchemeSeed: Colors.blue, // const Color.fromARGB(1, 226, 107, 141),
+                brightness: Brightness.light),
+            darkTheme: ThemeData(
+                useMaterial3: true,
+                colorSchemeSeed: Colors.blue, // const Color.fromARGB(1, 226, 107, 141),
+                brightness: Brightness.dark),
+            themeMode: state.themeMode,
+            initialRoute: AppScreens.main,
+            onGenerateRoute: getIt<AppRouter>().onGenerateRoute,
+          );
+        },
       ),
-      initialRoute: AppScreens.main,
-      onGenerateRoute: getIt<AppRouter>().onGenerateRoute,
     );
   }
 }

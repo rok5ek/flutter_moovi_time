@@ -27,14 +27,12 @@ class TextItemView extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.center,
                   // color: Colors.green[700],
-                  color: ColorScheme.fromSwatch(primarySwatch: Colors.amber).secondary.withOpacity(0.24),
+                  color: Theme.of(context).colorScheme.secondary.withOpacity(0.24), // ColorScheme.fromSwatch(primarySwatch: Colors.blue).secondary.withOpacity(0.24),
                   child: Text(
                     item.text,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.movieViewSubtitle.copyWith(
-                      color: ColorScheme.fromSwatch(primarySwatch: Colors.green).onSurface,
-                    ),
+                    style: AppTextStyles.movieViewSubtitle,
                   ),
                 ),
               ),

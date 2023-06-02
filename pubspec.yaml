@@ -66,6 +66,8 @@ dev_dependencies:
   json_serializable: ^6.6.1
   # User for retrofit client
   retrofit_generator: ^6.0.0
+  # Create widgets that are platform aware
+  flutter_platform_widgets: ^3.3.5
 
 # The following section is specific to Flutter packages.
 flutter:

@@ -9,6 +9,7 @@ import 'package:moovi_time/domain/usecases/get_movies.dart';
 import 'package:moovi_time/domain/usecases/get_tvshows.dart';
 import 'package:moovi_time/domain/usecases/gethomemodel/get_home_model.dart';
 import 'package:moovi_time/domain/usecases/gettvshowsmodel/get_tvshows_model.dart';
+import 'package:moovi_time/presentation/app_bloc.dart';
 import 'package:moovi_time/presentation/navigation/app_router.dart';
 import 'package:moovi_time/presentation/screens/home/home_bloc.dart';
 import 'package:moovi_time/presentation/screens/main/main_bloc.dart';
@@ -58,10 +59,11 @@ Future<void> initDependencies() async {
   );
 
   // blocs
+  getIt.registerLazySingleton<AppBloc>(() => AppBloc());
   getIt.registerLazySingleton<MainBloc>(() => MainBloc(getHomeModel: getIt<GetHomeModel>()));
   getIt.registerLazySingleton<HomeBloc>(() => HomeBloc(getHomeModel: getIt<GetHomeModel>()));
   getIt.registerLazySingleton<TvShowsBloc>(() => TvShowsBloc(getTvShowsModel: getIt<GetTvShowsModel>()));
-  getIt.registerLazySingleton<ProfileBloc>(() => ProfileBloc(getHomeModel: getIt<GetHomeModel>()));
+  getIt.registerLazySingleton<ProfileBloc>(() => ProfileBloc());
 
   // router
   getIt.registerLazySingleton<AppRouter>(() => AppRouter());
