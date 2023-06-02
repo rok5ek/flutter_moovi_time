@@ -28,7 +28,12 @@ class LargeSectionView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(AppPaddings.p16),
+            padding: const EdgeInsets.only(
+              left: AppPaddings.p16,
+              top: AppPaddings.p24,
+              right: AppPaddings.p16,
+              bottom: AppPaddings.p16,
+            ),
             child: Text(
               title,
               style: AppTextStyles.sectionViewTitle,
