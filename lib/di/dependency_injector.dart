@@ -7,12 +7,12 @@ import 'package:moovi_time/domain/repositories/app_repository.dart';
 import 'package:moovi_time/domain/usecases/get_genres.dart';
 import 'package:moovi_time/domain/usecases/get_movies.dart';
 import 'package:moovi_time/domain/usecases/get_tvshows.dart';
-import 'package:moovi_time/domain/usecases/gethomemodel/get_home_model.dart';
+import 'package:moovi_time/domain/usecases/getmoviesmodel/get_movies_model.dart';
 import 'package:moovi_time/domain/usecases/gettvshowsmodel/get_tvshows_model.dart';
 import 'package:moovi_time/presentation/app_bloc.dart';
 import 'package:moovi_time/presentation/navigation/app_router.dart';
-import 'package:moovi_time/presentation/screens/home/home_bloc.dart';
 import 'package:moovi_time/presentation/screens/main/main_bloc.dart';
+import 'package:moovi_time/presentation/screens/movies/movies_bloc.dart';
 import 'package:moovi_time/presentation/screens/profile/profile_bloc.dart';
 import 'package:moovi_time/presentation/screens/tvshows/tvshows_bloc.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -40,8 +40,8 @@ Future<void> initDependencies() async {
   getIt.registerLazySingleton<GetMovies>(() => GetMovies(repository: getIt<AppRepository>()));
   getIt.registerLazySingleton<GetTvShows>(() => GetTvShows(repository: getIt<AppRepository>()));
   getIt.registerLazySingleton<GetGenres>(() => GetGenres(repository: getIt<AppRepository>()));
-  getIt.registerLazySingleton<GetHomeModel>(
-    () => GetHomeModel(
+  getIt.registerLazySingleton<GetMoviesModel>(
+    () => GetMoviesModel(
       getMoviesNowPlaying: getIt<GetMovies>(),
       getMoviesPopular: getIt<GetMovies>(),
       getMoviesComingSoon: getIt<GetMovies>(),
@@ -60,8 +60,8 @@ Future<void> initDependencies() async {
 
   // blocs
   getIt.registerLazySingleton<AppBloc>(() => AppBloc());
-  getIt.registerLazySingleton<MainBloc>(() => MainBloc(getHomeModel: getIt<GetHomeModel>()));
-  getIt.registerLazySingleton<HomeBloc>(() => HomeBloc(getHomeModel: getIt<GetHomeModel>()));
+  getIt.registerLazySingleton<MainBloc>(() => MainBloc());
+  getIt.registerLazySingleton<MoviesBloc>(() => MoviesBloc(getMoviesModel: getIt<GetMoviesModel>()));
   getIt.registerLazySingleton<TvShowsBloc>(() => TvShowsBloc(getTvShowsModel: getIt<GetTvShowsModel>()));
   getIt.registerLazySingleton<ProfileBloc>(() => ProfileBloc());
 

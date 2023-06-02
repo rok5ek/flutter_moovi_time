@@ -8,17 +8,17 @@ import 'package:moovi_time/presentation/core/resources/app_text_styles.dart';
 import 'package:moovi_time/presentation/core/widgets/circle_section_view.dart';
 import 'package:moovi_time/presentation/core/widgets/large_section_view.dart';
 import 'package:moovi_time/presentation/core/widgets/text_section_view.dart';
-import 'package:moovi_time/presentation/screens/home/home_bloc.dart';
-import 'package:moovi_time/presentation/screens/home/home_state.dart';
+import 'package:moovi_time/presentation/screens/movies/movies_bloc.dart';
+import 'package:moovi_time/presentation/screens/movies/movies_state.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class MoviesScreen extends StatefulWidget {
+  const MoviesScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<MoviesScreen> createState() => _MoviesScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MoviesScreenState extends State<MoviesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildBody(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
+    return BlocBuilder<MoviesBloc, MoviesState>(
       builder: (context, state) {
         return ListView(
           key: const PageStorageKey("sections_key"),

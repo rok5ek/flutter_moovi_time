@@ -3,17 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moovi_time/domain/usecases/base/app_error.dart';
 import 'package:moovi_time/domain/usecases/base/app_result.dart';
 import 'package:moovi_time/domain/usecases/base/no_params.dart';
-import 'package:moovi_time/domain/usecases/gethomemodel/get_home_model.dart';
-import 'package:moovi_time/domain/usecases/gethomemodel/home_model_result.dart';
-import 'package:moovi_time/presentation/screens/home/home_event.dart';
-import 'package:moovi_time/presentation/screens/home/home_state.dart';
+import 'package:moovi_time/domain/usecases/getmoviesmodel/get_movies_model.dart';
+import 'package:moovi_time/domain/usecases/getmoviesmodel/movies_model_result.dart';
+import 'package:moovi_time/presentation/screens/movies/movies_event.dart';
+import 'package:moovi_time/presentation/screens/movies/movies_state.dart';
 
-class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  final GetHomeModel getHomeModel;
+class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
+  final GetMoviesModel getMoviesModel;
 
-  HomeBloc({
-    required this.getHomeModel,
-  }) : super(const HomeState(
+  MoviesBloc({
+    required this.getMoviesModel,
+  }) : super(const MoviesState(
           isLoading: true,
           nowPlayingMovies: [],
           popularMovies: [],
@@ -21,13 +21,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           topRatedMovies: [],
           genres: [],
         )) {
-    on<HomeEvent>((event, emit) async {
+    on<MoviesEvent>((event, emit) async {
       await event.when(
         init: () async {
-          AppResult<HomeModelResult, AppError> homeModelResult = await getHomeModel.call(const NoParams());
-          debugPrint("[App] [NowPlayingBloc] {NowPlayingBloc} result:$homeModelResult");
+          AppResult<MoviesModelResult, AppError> result = await getMoviesModel.call(const NoParams());
+          debugPrint("[App] [NowPlayingBloc] {NowPlayingBloc} result:$result");
 
-          homeModelResult.when(
+          result.when(
             success: (data) {
               emit(state.copyWith(
                 isLoading: false,
@@ -48,7 +48,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   @override
   Future<void> close() async {
-    getHomeModel.onDispose();
+    getMoviesModel.onDispose();
     super.close();
   }
 }

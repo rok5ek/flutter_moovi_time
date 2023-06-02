@@ -11,17 +11,17 @@ import 'package:moovi_time/domain/usecases/base/use_case.dart';
 import 'package:moovi_time/domain/usecases/genre_list_type.dart';
 import 'package:moovi_time/domain/usecases/get_genres.dart';
 import 'package:moovi_time/domain/usecases/get_movies.dart';
-import 'package:moovi_time/domain/usecases/gethomemodel/home_model_result.dart';
+import 'package:moovi_time/domain/usecases/getmoviesmodel/movies_model_result.dart';
 import 'package:moovi_time/domain/usecases/movie_list_type.dart';
 
-class GetHomeModel extends UseCase<AppResult<HomeModelResult, AppError>, NoParams> {
+class GetMoviesModel extends UseCase<AppResult<MoviesModelResult, AppError>, NoParams> {
   final GetMovies getMoviesNowPlaying;
   final GetMovies getMoviesPopular;
   final GetMovies getMoviesComingSoon;
   final GetMovies getMoviesTopRated;
   final GetGenres getGenres;
 
-  GetHomeModel({
+  GetMoviesModel({
     required this.getMoviesNowPlaying,
     required this.getMoviesPopular,
     required this.getMoviesComingSoon,
@@ -30,7 +30,7 @@ class GetHomeModel extends UseCase<AppResult<HomeModelResult, AppError>, NoParam
   });
 
   @override
-  Future<AppResult<HomeModelResult, AppError>> call(NoParams params) async {
+  Future<AppResult<MoviesModelResult, AppError>> call(NoParams params) async {
     final getMoviesNowPlayingRequest = getMoviesNowPlaying.call(GetMoviesParams(type: MovieListType.nowPlaying));
     final getMoviesPopularRequest = getMoviesPopular.call(GetMoviesParams(type: MovieListType.popular));
     final getMoviesComingSoonRequest = getMoviesComingSoon.call(GetMoviesParams(type: MovieListType.comingSoon));
@@ -42,7 +42,7 @@ class GetHomeModel extends UseCase<AppResult<HomeModelResult, AppError>, NoParam
       debugPrint(
           "[App] [GetHomeModel] {call} response1:$response1, response2:$response2, response3:$response3, response4:$response4, response5:$response5");
       return result5<
-          AppResult<HomeModelResult, AppError>,
+          AppResult<MoviesModelResult, AppError>,
           AppResult<List<MovieEntity>, AppError>,
           AppResult<List<MovieEntity>, AppError>,
           AppResult<List<MovieEntity>, AppError>,
@@ -56,7 +56,7 @@ class GetHomeModel extends UseCase<AppResult<HomeModelResult, AppError>, NoParam
         onSuccess: (p1, p2, p3, p4, p5) {
           debugPrint("[App] [GetHomeModel] {call} onSuccess:$p1 $p2 $p3 $p4 $p5");
           return AppResult.success(
-            HomeModelResult(
+            MoviesModelResult(
                 nowPlayingMovies: p1.result,
                 popularMovies: p2.result,
                 comingSoonMovies: p3.result,

@@ -1,1 +1,1 @@
-enum NavbarItem { home, tvShows, profile }
+enum NavbarItem { movies, tvShows, profile }
