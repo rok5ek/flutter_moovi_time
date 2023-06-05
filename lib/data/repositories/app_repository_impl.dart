@@ -17,7 +17,9 @@ import 'package:moovi_time/domain/usecases/base/app_result.dart';
 import 'package:moovi_time/domain/usecases/genre_list_type.dart';
 import 'package:moovi_time/domain/usecases/get_genres.dart';
 import 'package:moovi_time/domain/usecases/get_movies.dart';
+import 'package:moovi_time/domain/usecases/get_movies_by.dart';
 import 'package:moovi_time/domain/usecases/get_tvshows.dart';
+import 'package:moovi_time/domain/usecases/get_tvshows_by.dart';
 import 'package:moovi_time/domain/usecases/movie_list_type.dart';
 import 'package:moovi_time/domain/usecases/tvshow_list_type.dart';
 import 'package:retrofit/retrofit.dart';
@@ -123,6 +125,64 @@ class AppRepositoryImpl extends AppRepository {
           break;
       }
       List<GenreEntity> entities = response.data.results.map((GenreResponse e) => e.toModel()).toList();
+      return AppResult.success(entities);
+    } on DioError catch (e) {
+      int? statusCode = e.response?.statusCode;
+      final data = e.response?.data;
+      final AppError appError;
+      if (data is Map<String, dynamic>) {
+        // error response is json - parse to object
+        ApiError apiError = ApiError.fromJson(data);
+        appError = AppError(message: apiError.message, code: statusCode);
+      } else {
+        appError = AppError(message: null, code: statusCode);
+      }
+      return AppResult.error(appError);
+    } on Exception catch (e) {
+      return const AppResult.failure(AppException.server());
+    }
+  }
+
+  @override
+  Future<AppResult<List<MovieEntity>, AppError>> getMoviesBy(
+    CancelToken cancelToken,
+    GetMoviesByParams params,
+  ) async {
+    try {
+      HttpResponse<MovieResponseWrapper> response = await tmdbApiService.getMoviesBy(
+        {params.type.value: params.genreId},
+        cancelToken,
+      );
+      List<MovieEntity> entities = response.data.results.map((MovieResponse e) => e.toModel()).toList();
+      return AppResult.success(entities);
+    } on DioError catch (e) {
+      int? statusCode = e.response?.statusCode;
+      final data = e.response?.data;
+      final AppError appError;
+      if (data is Map<String, dynamic>) {
+        // error response is json - parse to object
+        ApiError apiError = ApiError.fromJson(data);
+        appError = AppError(message: apiError.message, code: statusCode);
+      } else {
+        appError = AppError(message: null, code: statusCode);
+      }
+      return AppResult.error(appError);
+    } on Exception catch (e) {
+      return const AppResult.failure(AppException.server());
+    }
+  }
+
+  @override
+  Future<AppResult<List<TvShowEntity>, AppError>> getTvShowsBy(
+    CancelToken cancelToken,
+    GetTvShowsByParams params,
+  ) async {
+    try {
+      HttpResponse<TvShowResponseWrapper> response = await tmdbApiService.getTvShowsBy(
+        {params.type.value: params.genreId},
+        cancelToken,
+      );
+      List<TvShowEntity> entities = response.data.results.map((TvShowResponse e) => e.toModel()).toList();
       return AppResult.success(entities);
     } on DioError catch (e) {
       int? statusCode = e.response?.statusCode;

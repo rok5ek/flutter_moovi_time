@@ -42,4 +42,16 @@ abstract class TmdbApiService {
 
   @GET(TmdbEndpoints.tvGenres)
   Future<HttpResponse<GenreResponseWrapper>> getTvGenres(@CancelRequest() CancelToken cancelToken);
+
+  @GET(TmdbEndpoints.discoverMoviesBy)
+  Future<HttpResponse<MovieResponseWrapper>> getMoviesBy(
+    @Queries() Map<String, dynamic> queryParams,
+    @CancelRequest() CancelToken cancelToken,
+  );
+
+  @GET(TmdbEndpoints.discoverTvShowsBy)
+  Future<HttpResponse<TvShowResponseWrapper>> getTvShowsBy(
+    @Queries() Map<String, dynamic> queryParams,
+    @CancelRequest() CancelToken cancelToken,
+  );
 }

@@ -8,6 +8,7 @@ part 'movie_response.g.dart';
 @freezed
 class MovieResponse with _$MovieResponse {
   const factory MovieResponse({
+    @JsonKey(name: "id") required int id,
     @JsonKey(name: "title") required String title,
     @JsonKey(name: "poster_path") required String posterPath,
     required bool adult,
@@ -21,6 +22,7 @@ class MovieResponse with _$MovieResponse {
 extension MovieResponseMapper on MovieResponse {
   MovieEntity toModel() {
     return MovieEntity(
+      id: id,
       title: title,
       image: "${Config.baseUrlImage}$posterPath",
       adult: adult,

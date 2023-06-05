@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:moovi_time/domain/models/movie_entity.dart';
 import 'package:moovi_time/domain/models/tvshow_entity.dart';
 
 part 'tvshows_state.freezed.dart';

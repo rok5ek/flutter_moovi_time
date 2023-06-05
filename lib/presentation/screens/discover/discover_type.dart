@@ -1,0 +1,1 @@
+enum DiscoverType { movie, tvShow }

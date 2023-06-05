@@ -22,8 +22,22 @@ class CircleItemView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CircleImageView(
-              image: item.imageUrl,
+            Stack(
+              children: [
+                CircleImageView(
+                  image: item.imageUrl,
+                ),
+                Positioned.fill(
+                  child: ClipOval(
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () {},
+                      ),
+                    ),
+                  ),
+                )
+              ],
             ),
             Padding(
               padding: const EdgeInsets.only(top: AppPaddings.p8),

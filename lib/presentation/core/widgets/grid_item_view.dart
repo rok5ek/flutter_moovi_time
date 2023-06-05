@@ -5,11 +5,13 @@ import 'package:moovi_time/presentation/core/resources/app_paddings.dart';
 import 'package:moovi_time/presentation/core/resources/app_shapes.dart';
 import 'package:moovi_time/presentation/core/resources/app_text_styles.dart';
 
-class LargeItemView extends StatelessWidget {
+class GridItemView extends StatelessWidget {
   final LargeItem item;
+  final Function onTap;
 
-  const LargeItemView({
+  const GridItemView({
     required this.item,
+    required this.onTap,
     Key? key,
   }) : super(key: key);
 
@@ -18,7 +20,6 @@ class LargeItemView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: AppPaddings.p8),
       child: SizedBox(
-        width: 140,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -28,6 +29,7 @@ class LargeItemView extends StatelessWidget {
                 child: Stack(
                   children: [
                     CachedNetworkImage(
+                      width: double.infinity,
                       imageUrl: item.imageUrl,
                       fit: BoxFit.cover,
                     ),

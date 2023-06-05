@@ -6,12 +6,15 @@ import 'package:moovi_time/data/repositories/app_repository_impl.dart';
 import 'package:moovi_time/domain/repositories/app_repository.dart';
 import 'package:moovi_time/domain/usecases/get_genres.dart';
 import 'package:moovi_time/domain/usecases/get_movies.dart';
+import 'package:moovi_time/domain/usecases/get_movies_by.dart';
 import 'package:moovi_time/domain/usecases/get_tvshows.dart';
+import 'package:moovi_time/domain/usecases/get_tvshows_by.dart';
 import 'package:moovi_time/domain/usecases/getmoviesmodel/get_movies_model.dart';
 import 'package:moovi_time/domain/usecases/gettvshowsmodel/get_tvshows_model.dart';
 import 'package:moovi_time/presentation/app_bloc.dart';
 import 'package:moovi_time/presentation/navigation/app_router.dart';
 import 'package:moovi_time/presentation/screens/discover/discover_bloc.dart';
+import 'package:moovi_time/presentation/screens/discover/discover_payload.dart';
 import 'package:moovi_time/presentation/screens/main/main_bloc.dart';
 import 'package:moovi_time/presentation/screens/movies/movies_bloc.dart';
 import 'package:moovi_time/presentation/screens/profile/profile_bloc.dart';
@@ -41,23 +44,21 @@ Future<void> initDependencies() async {
   getIt.registerLazySingleton<GetMovies>(() => GetMovies(repository: getIt<AppRepository>()));
   getIt.registerLazySingleton<GetTvShows>(() => GetTvShows(repository: getIt<AppRepository>()));
   getIt.registerLazySingleton<GetGenres>(() => GetGenres(repository: getIt<AppRepository>()));
-  getIt.registerLazySingleton<GetMoviesModel>(
-    () => GetMoviesModel(
-      getMoviesNowPlaying: getIt<GetMovies>(),
-      getMoviesPopular: getIt<GetMovies>(),
-      getMoviesComingSoon: getIt<GetMovies>(),
-      getMoviesTopRated: getIt<GetMovies>(),
-      getGenres: getIt<GetGenres>(),
-    ),
-  );
-  getIt.registerLazySingleton<GetTvShowsModel>(
-    () => GetTvShowsModel(
-      getTvShowsAiringToday: getIt<GetTvShows>(),
-      getTvShowsOnTheAir: getIt<GetTvShows>(),
-      getTvShowsPopular: getIt<GetTvShows>(),
-      getTvShowsTopRated: getIt<GetTvShows>(),
-    ),
-  );
+  getIt.registerLazySingleton<GetMoviesModel>(() => GetMoviesModel(
+        getMoviesNowPlaying: getIt<GetMovies>(),
+        getMoviesPopular: getIt<GetMovies>(),
+        getMoviesComingSoon: getIt<GetMovies>(),
+        getMoviesTopRated: getIt<GetMovies>(),
+        getGenres: getIt<GetGenres>(),
+      ));
+  getIt.registerLazySingleton<GetTvShowsModel>(() => GetTvShowsModel(
+        getTvShowsAiringToday: getIt<GetTvShows>(),
+        getTvShowsOnTheAir: getIt<GetTvShows>(),
+        getTvShowsPopular: getIt<GetTvShows>(),
+        getTvShowsTopRated: getIt<GetTvShows>(),
+      ));
+  getIt.registerLazySingleton<GetMoviesBy>(() => GetMoviesBy(repository: getIt<AppRepository>()));
+  getIt.registerLazySingleton<GetTvShowsBy>(() => GetTvShowsBy(repository: getIt<AppRepository>()));
 
   // blocs
   getIt.registerLazySingleton<AppBloc>(() => AppBloc());
@@ -65,7 +66,12 @@ Future<void> initDependencies() async {
   getIt.registerLazySingleton<MoviesBloc>(() => MoviesBloc(getMoviesModel: getIt<GetMoviesModel>()));
   getIt.registerLazySingleton<TvShowsBloc>(() => TvShowsBloc(getTvShowsModel: getIt<GetTvShowsModel>()));
   getIt.registerLazySingleton<ProfileBloc>(() => ProfileBloc());
-  getIt.registerLazySingleton<DiscoverBloc>(() => DiscoverBloc(getMoviesModel: getIt<GetMoviesModel>()));
+  // bloc with injected parameter
+  getIt.registerFactoryParam<DiscoverBloc, DiscoverPayload, void>((param1, param2) => DiscoverBloc(
+        payload: param1,
+        getMoviesBy: getIt<GetMoviesBy>(),
+        getTvShowsBy: getIt<GetTvShowsBy>(),
+      ));
 
   // router
   getIt.registerLazySingleton<AppRouter>(() => AppRouter());

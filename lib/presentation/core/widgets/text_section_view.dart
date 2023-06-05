@@ -12,13 +12,13 @@ class TextSectionView extends StatelessWidget {
   final String title;
   final List<TextItem> items;
   final double bottomPadding;
-
-  // final Function onTap;
+  final Function(TextItem item) onItemTap;
 
   TextSectionView({
     required this.title,
     this.bottomPadding = 0,
     required this.items,
+    required this.onItemTap,
     Key? key,
   }) : super(key: key);
 
@@ -53,6 +53,7 @@ class TextSectionView extends StatelessWidget {
                 TextItem item = items[index];
                 return TextItemView(
                   item: item,
+                  onTap: onItemTap,
                 );
               },
             ),

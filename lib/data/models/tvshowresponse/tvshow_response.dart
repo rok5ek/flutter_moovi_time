@@ -21,6 +21,7 @@ class TvShowResponse with _$TvShowResponse {
 extension TvShowResponseMapper on TvShowResponse {
   TvShowEntity toModel() {
     return TvShowEntity(
+      id: id,
       title: title,
       image: "${Config.baseUrlImage}$posterPath",
       overview: overview,

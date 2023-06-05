@@ -9,4 +9,6 @@ class TmdbEndpoints {
   static const String tvShowsTopRated = "/tv/top_rated";
   static const String movieGenres = "/genre/movie/list";
   static const String tvGenres = "/genre/tv/list";
+  static const String discoverMoviesBy = "/discover/movie";
+  static const String discoverTvShowsBy = "/discover/tv";
 }
