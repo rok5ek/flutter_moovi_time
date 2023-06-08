@@ -10,6 +10,8 @@ import 'package:moovi_time/presentation/core/widgets/circle_section_view.dart';
 import 'package:moovi_time/presentation/core/widgets/large_section_view.dart';
 import 'package:moovi_time/presentation/core/widgets/text_section_view.dart';
 import 'package:moovi_time/presentation/navigation/app_navigator.dart';
+import 'package:moovi_time/presentation/screens/details/details_payload.dart';
+import 'package:moovi_time/presentation/screens/details/details_type.dart';
 import 'package:moovi_time/presentation/screens/discover/discover_payload.dart';
 import 'package:moovi_time/presentation/screens/discover/discover_type.dart';
 import 'package:moovi_time/presentation/screens/movies/movies_bloc.dart';
@@ -62,10 +64,17 @@ class _MoviesScreenState extends State<MoviesScreen> {
                   return e.toItem();
                 }).toList()),
             LargeSectionView(
-                title: "Popular",
-                items: state.popularMovies.map((e) {
-                  return e.toItem();
-                }).toList()),
+              title: "Popular",
+              items: state.popularMovies.map((e) {
+                return e.toItem();
+              }).toList(),
+              onItemTap: (LargeItem item) {
+                AppNavigator.openDetailsScreen(
+                  context: context,
+                  payload: DetailsPayload(id: item.id, type: DetailsType.movie),
+                );
+              },
+            ),
             TextSectionView(
               title: "Genres",
               items: state.genres.map((e) {
@@ -74,25 +83,35 @@ class _MoviesScreenState extends State<MoviesScreen> {
               onItemTap: (TextItem item) {
                 AppNavigator.openDiscoverScreen(
                   context: context,
-                  payload: DiscoverPayload(
-                    title: item.text,
-                    type: DiscoverType.movie,
-                    genreId: item.id,
-                  ),
+                  payload: DiscoverPayload(title: item.text, type: DiscoverType.movie, genreId: item.id),
                 );
               },
             ),
             LargeSectionView(
-                title: "Coming Soon",
-                items: state.comingSoonMovies.map((e) {
-                  return e.toItem();
-                }).toList()),
+              title: "Coming Soon",
+              items: state.comingSoonMovies.map((e) {
+                return e.toItem();
+              }).toList(),
+              onItemTap: (LargeItem item) {
+                AppNavigator.openDetailsScreen(
+                  context: context,
+                  payload: DetailsPayload(id: item.id, type: DetailsType.movie),
+                );
+              },
+            ),
             LargeSectionView(
-                title: "Top Rated",
-                bottomPadding: AppPaddings.p36,
-                items: state.topRatedMovies.map((e) {
-                  return e.toItem();
-                }).toList())
+              title: "Top Rated",
+              bottomPadding: AppPaddings.p36,
+              items: state.topRatedMovies.map((e) {
+                return e.toItem();
+              }).toList(),
+              onItemTap: (LargeItem item) {
+                AppNavigator.openDetailsScreen(
+                  context: context,
+                  payload: DetailsPayload(id: item.id, type: DetailsType.movie),
+                );
+              },
+            )
           ],
         );
       },

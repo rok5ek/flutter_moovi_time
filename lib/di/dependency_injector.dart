@@ -13,6 +13,8 @@ import 'package:moovi_time/domain/usecases/getmoviesmodel/get_movies_model.dart'
 import 'package:moovi_time/domain/usecases/gettvshowsmodel/get_tvshows_model.dart';
 import 'package:moovi_time/presentation/app_bloc.dart';
 import 'package:moovi_time/presentation/navigation/app_router.dart';
+import 'package:moovi_time/presentation/screens/details/details_bloc.dart';
+import 'package:moovi_time/presentation/screens/details/details_payload.dart';
 import 'package:moovi_time/presentation/screens/discover/discover_bloc.dart';
 import 'package:moovi_time/presentation/screens/discover/discover_payload.dart';
 import 'package:moovi_time/presentation/screens/main/main_bloc.dart';
@@ -68,6 +70,11 @@ Future<void> initDependencies() async {
   getIt.registerLazySingleton<ProfileBloc>(() => ProfileBloc());
   // bloc with injected parameter
   getIt.registerFactoryParam<DiscoverBloc, DiscoverPayload, void>((param1, param2) => DiscoverBloc(
+        payload: param1,
+        getMoviesBy: getIt<GetMoviesBy>(),
+        getTvShowsBy: getIt<GetTvShowsBy>(),
+      ));
+  getIt.registerFactoryParam<DetailsBloc, DetailsPayload, void>((param1, param2) => DetailsBloc(
         payload: param1,
         getMoviesBy: getIt<GetMoviesBy>(),
         getTvShowsBy: getIt<GetTvShowsBy>(),

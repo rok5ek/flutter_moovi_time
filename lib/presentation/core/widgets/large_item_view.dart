@@ -7,9 +7,11 @@ import 'package:moovi_time/presentation/core/resources/app_text_styles.dart';
 
 class LargeItemView extends StatelessWidget {
   final LargeItem item;
+  final Function(LargeItem) onTap;
 
   const LargeItemView({
     required this.item,
+    required this.onTap,
     Key? key,
   }) : super(key: key);
 
@@ -35,7 +37,9 @@ class LargeItemView extends StatelessWidget {
                       child: Material(
                         color: Colors.transparent,
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            onTap(item);
+                          },
                         ),
                       ),
                     )

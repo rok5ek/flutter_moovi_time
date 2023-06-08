@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:moovi_time/domain/models/tvshow_entity.dart';
+import 'package:moovi_time/presentation/core/models/large_item.dart';
 import 'package:moovi_time/presentation/core/resources/app_paddings.dart';
 import 'package:moovi_time/presentation/core/resources/app_text_styles.dart';
 import 'package:moovi_time/presentation/core/widgets/circle_section_view.dart';
 import 'package:moovi_time/presentation/core/widgets/large_section_view.dart';
+import 'package:moovi_time/presentation/navigation/app_navigator.dart';
+import 'package:moovi_time/presentation/screens/details/details_payload.dart';
+import 'package:moovi_time/presentation/screens/details/details_type.dart';
 import 'package:moovi_time/presentation/screens/tvshows/tvshows_bloc.dart';
 import 'package:moovi_time/presentation/screens/tvshows/tvshows_state.dart';
 
@@ -56,21 +60,42 @@ class _TvShowsScreenState extends State<TvShowsScreen> {
                   return e.toItem();
                 }).toList()),
             LargeSectionView(
-                title: "On The Air",
-                items: state.onTheAirShows.map((e) {
-                  return e.toItem();
-                }).toList()),
+              title: "On The Air",
+              items: state.onTheAirShows.map((e) {
+                return e.toItem();
+              }).toList(),
+              onItemTap: (LargeItem item) {
+                AppNavigator.openDetailsScreen(
+                  context: context,
+                  payload: DetailsPayload(id: item.id, type: DetailsType.movie),
+                );
+              },
+            ),
             LargeSectionView(
-                title: "Popular",
-                items: state.popularShows.map((e) {
-                  return e.toItem();
-                }).toList()),
+              title: "Popular",
+              items: state.popularShows.map((e) {
+                return e.toItem();
+              }).toList(),
+              onItemTap: (LargeItem item) {
+                AppNavigator.openDetailsScreen(
+                  context: context,
+                  payload: DetailsPayload(id: item.id, type: DetailsType.movie),
+                );
+              },
+            ),
             LargeSectionView(
-                title: "Top Rated",
-                bottomPadding: AppPaddings.p36,
-                items: state.topRatedShows.map((e) {
-                  return e.toItem();
-                }).toList())
+              title: "Top Rated",
+              bottomPadding: AppPaddings.p36,
+              items: state.topRatedShows.map((e) {
+                return e.toItem();
+              }).toList(),
+              onItemTap: (LargeItem item) {
+                AppNavigator.openDetailsScreen(
+                  context: context,
+                  payload: DetailsPayload(id: item.id, type: DetailsType.movie),
+                );
+              },
+            )
           ],
         );
       },

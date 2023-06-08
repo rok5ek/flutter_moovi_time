@@ -7,7 +7,7 @@ import 'package:moovi_time/presentation/core/widgets/tap_view.dart';
 
 class TextItemView extends StatelessWidget {
   final TextItem item;
-  final Function(TextItem item) onTap;
+  final Function(TextItem) onTap;
 
   const TextItemView({
     required this.item,

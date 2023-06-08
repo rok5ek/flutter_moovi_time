@@ -10,13 +10,13 @@ class LargeSectionView extends StatelessWidget {
   final String title;
   final List<LargeItem> items;
   final double bottomPadding;
-
-  // final Function onTap;
+  final void Function(LargeItem item) onItemTap;
 
   LargeSectionView({
     required this.title,
     this.bottomPadding = 0,
     required this.items,
+    required this.onItemTap,
     Key? key,
   }) : super(key: key);
 
@@ -51,6 +51,9 @@ class LargeSectionView extends StatelessWidget {
                 LargeItem item = items[index];
                 return LargeItemView(
                   item: item,
+                  onTap: (LargeItem item) {
+                    onItemTap(item);
+                  },
                 );
               },
             ),

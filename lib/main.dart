@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moovi_time/di/dependency_injector.dart';
 import 'package:moovi_time/presentation/app_bloc.dart';
@@ -12,6 +13,9 @@ void main() async {
   await initDependencies();
 
   // style status bar and navigation bar
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
   // SystemChrome.setSystemUIOverlayStyle(
   //   SystemUiOverlayStyle(
   //       statusBarColor: AppColors.transparent,
