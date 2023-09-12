@@ -50,20 +50,11 @@ class AppRepositoryImpl extends AppRepository {
           response = await tmdbApiService.getMoviesTopRated(cancelToken);
           break;
       }
-      List<MovieEntity> entities = response.data.results.map((MovieResponse e) => e.toModel()).toList();
+      List<MovieEntity> entities =
+          response.data.results.map((MovieResponse e) => e.toModel()).toList();
       return AppResult.success(entities);
     } on DioError catch (e) {
-      int? statusCode = e.response?.statusCode;
-      final data = e.response?.data;
-      final AppError appError;
-      if (data is Map<String, dynamic>) {
-        // error response is json - parse to object
-        ApiError apiError = ApiError.fromJson(data);
-        appError = AppError(message: apiError.message, code: statusCode);
-      } else {
-        appError = AppError(message: null, code: statusCode);
-      }
-      return AppResult.error(appError);
+      return AppResult.error(_handleDioError(e));
     } on Exception catch (e) {
       return const AppResult.failure(AppException.server());
     }
@@ -90,20 +81,11 @@ class AppRepositoryImpl extends AppRepository {
           response = await tmdbApiService.getTvShowsTopRated(cancelToken);
           break;
       }
-      List<TvShowEntity> entities = response.data.results.map((TvShowResponse e) => e.toModel()).toList();
+      List<TvShowEntity> entities =
+          response.data.results.map((TvShowResponse e) => e.toModel()).toList();
       return AppResult.success(entities);
     } on DioError catch (e) {
-      int? statusCode = e.response?.statusCode;
-      final data = e.response?.data;
-      final AppError appError;
-      if (data is Map<String, dynamic>) {
-        // error response is json - parse to object
-        ApiError apiError = ApiError.fromJson(data);
-        appError = AppError(message: apiError.message, code: statusCode);
-      } else {
-        appError = AppError(message: null, code: statusCode);
-      }
-      return AppResult.error(appError);
+      return AppResult.error(_handleDioError(e));
     } on Exception catch (e) {
       return const AppResult.failure(AppException.server());
     }
@@ -124,20 +106,11 @@ class AppRepositoryImpl extends AppRepository {
           response = await tmdbApiService.getTvGenres(cancelToken);
           break;
       }
-      List<GenreEntity> entities = response.data.results.map((GenreResponse e) => e.toModel()).toList();
+      List<GenreEntity> entities =
+          response.data.results.map((GenreResponse e) => e.toModel()).toList();
       return AppResult.success(entities);
     } on DioError catch (e) {
-      int? statusCode = e.response?.statusCode;
-      final data = e.response?.data;
-      final AppError appError;
-      if (data is Map<String, dynamic>) {
-        // error response is json - parse to object
-        ApiError apiError = ApiError.fromJson(data);
-        appError = AppError(message: apiError.message, code: statusCode);
-      } else {
-        appError = AppError(message: null, code: statusCode);
-      }
-      return AppResult.error(appError);
+      return AppResult.error(_handleDioError(e));
     } on Exception catch (e) {
       return const AppResult.failure(AppException.server());
     }
@@ -149,24 +122,16 @@ class AppRepositoryImpl extends AppRepository {
     GetMoviesByParams params,
   ) async {
     try {
-      HttpResponse<MovieResponseWrapper> response = await tmdbApiService.getMoviesBy(
+      HttpResponse<MovieResponseWrapper> response =
+          await tmdbApiService.getMoviesBy(
         {params.type.value: params.genreId},
         cancelToken,
       );
-      List<MovieEntity> entities = response.data.results.map((MovieResponse e) => e.toModel()).toList();
+      List<MovieEntity> entities =
+          response.data.results.map((MovieResponse e) => e.toModel()).toList();
       return AppResult.success(entities);
     } on DioError catch (e) {
-      int? statusCode = e.response?.statusCode;
-      final data = e.response?.data;
-      final AppError appError;
-      if (data is Map<String, dynamic>) {
-        // error response is json - parse to object
-        ApiError apiError = ApiError.fromJson(data);
-        appError = AppError(message: apiError.message, code: statusCode);
-      } else {
-        appError = AppError(message: null, code: statusCode);
-      }
-      return AppResult.error(appError);
+      return AppResult.error(_handleDioError(e));
     } on Exception catch (e) {
       return const AppResult.failure(AppException.server());
     }
@@ -178,26 +143,32 @@ class AppRepositoryImpl extends AppRepository {
     GetTvShowsByParams params,
   ) async {
     try {
-      HttpResponse<TvShowResponseWrapper> response = await tmdbApiService.getTvShowsBy(
+      HttpResponse<TvShowResponseWrapper> response =
+          await tmdbApiService.getTvShowsBy(
         {params.type.value: params.genreId},
         cancelToken,
       );
-      List<TvShowEntity> entities = response.data.results.map((TvShowResponse e) => e.toModel()).toList();
+      List<TvShowEntity> entities =
+          response.data.results.map((TvShowResponse e) => e.toModel()).toList();
       return AppResult.success(entities);
     } on DioError catch (e) {
-      int? statusCode = e.response?.statusCode;
-      final data = e.response?.data;
-      final AppError appError;
-      if (data is Map<String, dynamic>) {
-        // error response is json - parse to object
-        ApiError apiError = ApiError.fromJson(data);
-        appError = AppError(message: apiError.message, code: statusCode);
-      } else {
-        appError = AppError(message: null, code: statusCode);
-      }
-      return AppResult.error(appError);
+      return AppResult.error(_handleDioError(e));
     } on Exception catch (e) {
       return const AppResult.failure(AppException.server());
     }
+  }
+
+  AppError _handleDioError(DioError e) {
+    int? statusCode = e.response?.statusCode;
+    final data = e.response?.data;
+    final AppError appError;
+    if (data is Map<String, dynamic>) {
+      // error response is json - parse to object
+      ApiError apiError = ApiError.fromJson(data);
+      appError = AppError(message: apiError.message, code: statusCode);
+    } else {
+      appError = AppError(message: null, code: statusCode);
+    }
+    return appError;
   }
 }
