@@ -2,6 +2,13 @@
 
 An open source movie centered mobile app made with Flutter.
 
+## App preview
+
+<p>
+<img style='margin-right: 30px' alt='MooviTime dark theme' src='readme/moovi_time_dark.png' width='240px'/>
+<img alt='MooviTime light theme' src='readme/moovi_time_light.png' width='240px'/>
+</p>
+
 ## Clean Architecture
 
 Defined as 3 layers, from outer to the inner one
@@ -27,7 +34,7 @@ flutter build apk
 flutter build ipa
 ```
 
-## How to build the app before first run?
+## How to run the app for the first time?
 
     1. Install all packages/libraries `flutter packages pub get`
     2. Build generated models `flutter pub run build_runner build --delete-conflicting-outputs`
