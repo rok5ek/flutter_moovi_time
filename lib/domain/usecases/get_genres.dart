@@ -5,19 +5,16 @@ import 'package:moovi_time/domain/usecases/base/app_result.dart';
 import 'package:moovi_time/domain/usecases/base/use_case.dart';
 import 'package:moovi_time/domain/usecases/genre_list_type.dart';
 
-class GetGenres extends UseCase<AppResult<List<GenreEntity>, AppError>, GetGenresParams> {
+class GetGenres
+    extends UseCase<AppResult<List<GenreEntity>, AppError>, GetGenresParams> {
   final AppRepository repository;
 
   GetGenres({required this.repository});
 
   @override
-  Future<AppResult<List<GenreEntity>, AppError>> call(GetGenresParams params) async {
+  Future<AppResult<List<GenreEntity>, AppError>> call(
+      GetGenresParams params) async {
     return await repository.getGenres(cancelToken, params);
-  }
-
-  @override
-  void onDispose() {
-    cancelToken.cancel();
   }
 }
 

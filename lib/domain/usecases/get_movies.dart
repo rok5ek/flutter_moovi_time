@@ -5,19 +5,16 @@ import 'package:moovi_time/domain/usecases/base/app_result.dart';
 import 'package:moovi_time/domain/usecases/base/use_case.dart';
 import 'package:moovi_time/domain/usecases/movie_list_type.dart';
 
-class GetMovies extends UseCase<AppResult<List<MovieEntity>, AppError>, GetMoviesParams> {
+class GetMovies
+    extends UseCase<AppResult<List<MovieEntity>, AppError>, GetMoviesParams> {
   final AppRepository repository;
 
   GetMovies({required this.repository});
 
   @override
-  Future<AppResult<List<MovieEntity>, AppError>> call(GetMoviesParams params) async {
+  Future<AppResult<List<MovieEntity>, AppError>> call(
+      GetMoviesParams params) async {
     return await repository.getMovies(cancelToken, params);
-  }
-
-  @override
-  void onDispose() {
-    cancelToken.cancel();
   }
 }
 

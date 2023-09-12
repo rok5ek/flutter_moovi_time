@@ -5,19 +5,16 @@ import 'package:moovi_time/domain/usecases/base/app_result.dart';
 import 'package:moovi_time/domain/usecases/base/use_case.dart';
 import 'package:moovi_time/domain/usecases/discover_by_type.dart';
 
-class GetTvShowsBy extends UseCase<AppResult<List<TvShowEntity>, AppError>, GetTvShowsByParams> {
+class GetTvShowsBy extends UseCase<AppResult<List<TvShowEntity>, AppError>,
+    GetTvShowsByParams> {
   final AppRepository repository;
 
   GetTvShowsBy({required this.repository});
 
   @override
-  Future<AppResult<List<TvShowEntity>, AppError>> call(GetTvShowsByParams params) async {
+  Future<AppResult<List<TvShowEntity>, AppError>> call(
+      GetTvShowsByParams params) async {
     return await repository.getTvShowsBy(cancelToken, params);
-  }
-
-  @override
-  void onDispose() {
-    cancelToken.cancel();
   }
 }
 
