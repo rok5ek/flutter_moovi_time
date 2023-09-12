@@ -1,6 +1,6 @@
 # MooviTime
 
-A movie centered mobile app made with Flutter.
+An open source movie centered mobile app made with Flutter.
 
 ## Clean Architecture
 
@@ -17,30 +17,54 @@ and [here](https://devmuaz.medium.com/flutter-clean-architecture-series-part-1-d
 
 ## Build Android apk
 
+```
 flutter build apk
+```
 
-## Build models
+## Build iOS ipa
+
+```
+flutter build ipa
+```
+
+## How to build the app before first run?
+
+    1. Install all packages/libraries `flutter packages pub get`
+    2. Build generated models `flutter pub run build_runner build --delete-conflicting-outputs`
+    3. Click play
+
+## Flutter cmd helper methods
 
 Clean built models
-
-- flutter pub run build_runner clean
+```
+flutter pub run build_runner clean
+```
 
 Run build runner
-
-- flutter pub run build_runner build --delete-conflicting-outputs
+```
+flutter pub run build_runner build --delete-conflicting-outputs
+```
 
 Analyze dependencies to find which ones can be upgraded
-
-- flutter pub outdated
+```
+flutter pub outdated
+```
 
 Upgrade all dependencies
-
-- flutter pub upgrade --major-versions
+```
+flutter pub upgrade --major-versions
+```
 
 Flutter clean
 
-- flutter clean
-- flutter packages pub get
+```
+flutter clean
+```
+
+Flutter get packages
+```
+flutter packages pub get
+```
 
 ## API
 

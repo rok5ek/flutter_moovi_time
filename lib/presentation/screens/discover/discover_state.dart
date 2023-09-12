@@ -1,6 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:moovi_time/domain/models/genre_entity.dart';
-import 'package:moovi_time/domain/models/movie_entity.dart';
 import 'package:moovi_time/presentation/core/models/large_item.dart';
 
 part 'discover_state.freezed.dart';
@@ -9,6 +7,6 @@ part 'discover_state.freezed.dart';
 class DiscoverState with _$DiscoverState {
   const factory DiscoverState({
     required bool isLoading,
-    required List<LargeItem> items
+    required List<LargeItem> items,
   }) = _DiscoverState;
 }
